@@ -7,5 +7,6 @@ public class Main {
         String URL_BASE = "https://www.swapi.tech/api/";
         SkyCrawler skyCrawler = new SkyCrawler();
         skyCrawler.iniciarCrawl(URL_BASE);
+        skyCrawler.generarInforme();
     }
 }
