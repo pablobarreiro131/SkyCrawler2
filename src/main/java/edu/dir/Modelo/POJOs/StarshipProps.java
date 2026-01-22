@@ -6,4 +6,44 @@ public class StarshipProps {
     public String name, model, starship_class, manufacturer, cost_in_credits, length, crew, passengers;
     public String max_atmosphering_speed, hyperdrive_rating, MGLT, cargo_capacity, consumables, url;
     public List<String> films, pilots;
+
+    @Override
+    public String toString() {
+        return String.format("""
+                ╔════════════════════════════════════════════════════════════════
+                ║ NAVE ESPACIAL: %s
+                ╠════════════════════════════════════════════════════════════════
+                ║ Modelo: %s
+                ║ Clase: %s
+                ║ Fabricante: %s
+                ║ Costo: %s créditos
+                ║ Longitud: %s m
+                ║ Tripulación: %s
+                ║ Pasajeros: %s
+                ║ Velocidad máxima atmosférica: %s
+                ║ Rating hyperdrive: %s
+                ║ MGLT: %s
+                ║ Capacidad de carga: %s kg
+                ║ Consumibles: %s
+                ║ Películas: %d
+                ║ Pilotos: %d
+                ╚════════════════════════════════════════════════════════════════
+                """,
+                name != null ? name : "Desconocido",
+                model != null ? model : "Desconocido",
+                starship_class != null ? starship_class : "Desconocido",
+                manufacturer != null ? manufacturer : "Desconocido",
+                cost_in_credits != null ? cost_in_credits : "Desconocido",
+                length != null ? length : "Desconocido",
+                crew != null ? crew : "Desconocido",
+                passengers != null ? passengers : "Desconocido",
+                max_atmosphering_speed != null ? max_atmosphering_speed : "Desconocido",
+                hyperdrive_rating != null ? hyperdrive_rating : "Desconocido",
+                MGLT != null ? MGLT : "Desconocido",
+                cargo_capacity != null ? cargo_capacity : "Desconocido",
+                consumables != null ? consumables : "Desconocido",
+                films != null ? films.size() : 0,
+                pilots != null ? pilots.size() : 0
+        );
+    }
 }

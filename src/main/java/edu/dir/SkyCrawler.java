@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 public class SkyCrawler {
 
-    private HttpManager httpManager = new HttpManager();
-    private Set<String> urlsVisitadas = new HashSet<>();
-    private List<Object> resultados = new ArrayList<>();
+    private final HttpManager httpManager = new HttpManager();
+    private final Set<String> urlsVisitadas = new HashSet<>();
+    private final List<Object> resultados = new ArrayList<>();
 
     public void iniciarCrawl(String urlInicial) {
         RespuestaSWAPI root = httpManager.fetchData(urlInicial, RespuestaSWAPI.class).join();
@@ -52,14 +52,15 @@ public class SkyCrawler {
             if (urlsVisitadas.contains(url)) return;
             urlsVisitadas.add(url);
         }
+
         Class<?> claseDestino = determinarClase(categoria);
-        Object detalle = httpManager.fetchData(url, claseDestino).join();
+        Object detalle = httpManager.fetchDataFromProperties(url, claseDestino).join();
+
         if (detalle != null) {
             synchronized (resultados) {
                 resultados.add(detalle);
             }
         }
-        System.out.println("[CRAWLER] guardado: " + url);
     }
 
     public Class<?> determinarClase(String categoria){
@@ -77,6 +78,9 @@ public class SkyCrawler {
     public void generarInforme() {
         System.out.println("--------------------------------------------------");
         System.out.println("Crawl completado. Total de objetos recolectados: " + resultados.size());
+        for (Object obj : resultados) {
+            System.out.println(obj.toString());
+        }
         System.out.println("--------------------------------------------------");
     }
 
